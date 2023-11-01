@@ -7,5 +7,11 @@
   },
   "[prisma]": {
     "editor.formatOnSave": true
-  }
+  },
+  "cSpell.words": [
+    "Bebas",
+    "icterine",
+    "Neue",
+    "telemagenta"
+  ]
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@500;700&family=Krona+One&display=swap');
+
 /**
  * START --- SETUP TAILWINDCSS EDIT
  *
@@ -11,3 +13,136 @@
 /**
  * END --- SETUP TAILWINDCSS EDIT
  */
+
+
+@layer base {
+  body {
+    @apply font-sans m-0 p-0
+  }
+
+  h1 {
+    @apply font-condensed text-9xl uppercase text-icterine;
+  }
+
+  footer a {
+    @apply hover:underline
+  }
+
+  /* form elements */
+  textarea {
+    @apply bg-white dark:bg-stormDust text-black dark:text-white font-bold text-xl py-8 px-10 w-full outline-icterine
+  }
+
+  svg {
+    @apply fill-current;
+  }
+}
+
+@layer components {
+  h1 .outline {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #fbfd5d;
+    -webkit-text-fill-color: transparent;
+    @apply border-none outline-none;
+  }
+
+  /* NAVIGATION */
+  @keyframes scroll-down {
+    0% {
+      transform: translateY(-100%);
+    }
+    10% {
+      transform: translateY(-100%);
+    }
+    35% {
+      transform: translateY(0%);
+    }
+  }
+
+  .sticky-bar {
+    animation: scroll-down linear;
+    animation-timeline: scroll()
+    /* @apply -translate-y-16 */
+  }
+
+  nav.top-bar ul {
+    @apply flex items-center gap-12
+  }
+
+  nav.top-bar ul li button,
+  nav.top-bar ul li a {
+    @apply font-bold text-white inline-block hover:text-icterine
+  }
+
+  nav.top-bar ul li a.button {
+    @apply bg-fountainBlue py-2 px-6 text-black hover:bg-icterine
+  }
+
+  /* shared link */
+  .shared-link:has(+ .shared-link) {
+    @apply border-b-2 border-b-black dark:border-b-icterine
+  }
+
+  /* UP / DOWN BUTTONS */
+  .up svg,
+  .down svg {
+    @apply fill-none stroke-2 stroke-cinder dark:stroke-icterine
+  }
+
+  .up.filled svg,
+  .down.filled svg {
+    @apply fill-cinder stroke-none dark:fill-icterine;
+  }
+
+  /* comments */
+  .comment {
+    @apply text-xl leading-8
+  }
+
+  .comment p {
+    @apply mb-6
+  }
+
+  .comment .comment p {
+    @apply text-base;
+  }
+}
+
+@layer utilities {
+  .page-grid {
+    @apply grid grid-cols-12 gap-x-5
+  }
+
+  .limit-page-width {
+    @apply col-span-9;
+  }
+
+  .center {
+    @apply flex items-center justify-center;
+  }
+
+  /* buttons */
+  .button {
+    @apply font-bold
+  }
+
+  .button.small {
+    @apply py-2 px-6;
+  }
+
+  .button.large {
+    @apply text-2xl py-5 px-[72px]
+  }
+
+  .button.light-mode {
+    @apply bg-fountainBlue dark:bg-icterine text-black hover:bg-black hover:text-icterine
+  }
+
+  .button.dark-mode {
+    @apply bg-icterine text-black hover:bg-black hover:text-icterine
+  }
+
+  .button.secondary {
+    @apply bg-stormDust text-icterine hover:bg-black
+  }
+}
