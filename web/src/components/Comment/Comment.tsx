@@ -1,3 +1,7 @@
+import { useState } from 'react'
+
+import { AnimatePresence, motion } from 'framer-motion'
+
 import { Link, routes } from '@redwoodjs/router'
 
 import CommentForm from '../CommentForm/CommentForm'
@@ -8,11 +12,13 @@ interface Props {
   commentedBy: {
     firstName: string
     lastName: string
-    username: string
+    nickname: string
   }
 }
 
 const Comment = ({ children, commentedBy }: Props) => {
+  const [isCommentsShowing, setIsCommentsShowing] = useState(false)
+
   return (
     <div className="shared-link mb-10 flex gap-x-5 pb-6 pl-4 pr-8 pt-8">
       {/* vote */}
@@ -29,7 +35,7 @@ const Comment = ({ children, commentedBy }: Props) => {
         {/* comment meta data */}
         <div className="text-medium mb-2 font-sans text-sm dark:text-icterine">
           <Link
-            to={routes.profile({ username: commentedBy.username })}
+            to={routes.profile({ nickname: commentedBy.nickname })}
             className="font-bold underline hover:no-underline"
           >
             {commentedBy.firstName} {commentedBy.lastName}
@@ -55,9 +61,26 @@ const Comment = ({ children, commentedBy }: Props) => {
 
           <p>Anyways, amazing images! Thanks!</p>
 
-          <button className="button small secondary">Reply</button>
+          {!isCommentsShowing && (
+            <button
+              className="button small secondary"
+              onClick={() => setIsCommentsShowing(true)}
+            >
+              Reply
+            </button>
+          )}
 
-          <CommentForm />
+          <AnimatePresence>
+            {isCommentsShowing && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+              >
+                <CommentForm close={() => setIsCommentsShowing(false)} />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* nested comments */}
           {children}

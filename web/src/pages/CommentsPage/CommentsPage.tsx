@@ -1,11 +1,11 @@
 import { MetaTags } from '@redwoodjs/web'
 
-const CommentsPage = ({ username }) => {
+const CommentsPage = ({ nickname }) => {
   return (
     <>
       <MetaTags title="Comments" description="Comments page" />
 
-      <h1>CommentsPage for {username}</h1>
+      <h1>CommentsPage for {nickname}</h1>
     </>
   )
 }

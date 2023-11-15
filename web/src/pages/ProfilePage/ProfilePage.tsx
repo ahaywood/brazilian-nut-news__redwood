@@ -1,11 +1,11 @@
 import { MetaTags } from '@redwoodjs/web'
 
-const ProfilePage = ({ username }) => {
+const ProfilePage = ({ nickname }) => {
   return (
     <>
       <MetaTags title="Profile" description="Profile page" />
 
-      <h1>ProfilePage: {username}</h1>
+      <h1>ProfilePage: {nickname}</h1>
     </>
   )
 }

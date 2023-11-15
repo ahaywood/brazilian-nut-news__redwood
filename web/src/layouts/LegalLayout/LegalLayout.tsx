@@ -3,7 +3,7 @@ type LegalLayoutProps = {
 }
 
 const LegalLayout = ({ children }: LegalLayoutProps) => {
-  return <>{children}</>
+  return <div className="bg-icterine">{children}</div>
 }
 
 export default LegalLayout

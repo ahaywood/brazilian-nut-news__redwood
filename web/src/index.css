@@ -46,6 +46,13 @@
     @apply border-none outline-none;
   }
 
+  h1.text-cinder .outline {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #25292f;
+    -webkit-text-fill-color: transparent;
+    @apply border-none outline-none;
+  }
+
   /* NAVIGATION */
   @keyframes scroll-down {
     0% {

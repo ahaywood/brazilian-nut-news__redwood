@@ -1,12 +1,16 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
-const EditProfilePage = () => {
+interface Props {
+  nickname: string
+}
+
+const EditProfilePage = ({ nickname }: Props) => {
   return (
     <>
       <MetaTags title="EditProfile" description="EditProfile page" />
 
-      <h1>EditProfilePage</h1>
+      <h1>EditProfilePage: {nickname}</h1>
       <p>
         Find me in{' '}
         <code>./web/src/pages/EditProfilePage/EditProfilePage.tsx</code>

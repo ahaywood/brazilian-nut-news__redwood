@@ -9,6 +9,7 @@
 
 import { Router, Route, Set } from '@redwoodjs/router'
 
+import { useAuth } from './auth'
 import BaseLayout from './layouts/BaseLayout/BaseLayout'
 import LegalLayout from './layouts/LegalLayout/LegalLayout'
 import LinkLayout from './layouts/LinkLayout/LinkLayout'
@@ -16,13 +17,17 @@ import ProfileLayout from './layouts/ProfileLayout/ProfileLayout'
 
 const Routes = () => {
   return (
-    <Router>
+    <Router useAuth={useAuth}>
+      <Route path="/login" page={LoginPage} name="login" />
+      <Route path="/signup" page={SignupPage} name="signup" />
+      <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
+      <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       <Set wrap={BaseLayout}>
         <Set wrap={ProfileLayout}>
-          <Route path="/profile/{username:String}/favorites" page={FavoritesPage} name="favorites" />
-          <Route path="/profile/{username:String}/comments" page={CommentsPage} name="comments" />
-          <Route path="/profile/{username:String}" page={ProfilePage} name="profile" />
-          <Route path="/profile/{username:String}/edit" page={EditProfilePage} name="editProfile" />
+          <Route path="/profile/{nickname:String}/favorites" page={FavoritesPage} name="favorites" />
+          <Route path="/profile/{nickname:String}/comments" page={CommentsPage} name="comments" />
+          <Route path="/profile/{nickname:String}" page={ProfilePage} name="profile" />
+          <Route path="/profile/{nickname:String}/edit" page={EditProfilePage} name="editProfile" />
         </Set>
 
         <Set wrap={LegalLayout}>
