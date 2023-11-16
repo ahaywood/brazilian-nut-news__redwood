@@ -62,6 +62,8 @@ const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
     <>
       <MetaTags title="Reset Password" />
 
+      <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
+
       <div className="page-grid min-h-screen bg-cinder">
         <div className="col-span-12 col-start-1 row-start-1">
           <h1 className="max-w-screen overflow-hidden pt-6 text-[375px] leading-[295px] text-fountainBlue">

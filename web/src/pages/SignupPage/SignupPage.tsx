@@ -14,6 +14,7 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import Footer from 'src/components/Footer/Footer'
 
 const SignupPage = () => {
   const { isAuthenticated, signUp } = useAuth()
@@ -34,6 +35,9 @@ const SignupPage = () => {
     const response = await signUp({
       username: data.username,
       password: data.password,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      nickname: data.nickname,
     })
 
     if (response.message) {
@@ -50,76 +54,152 @@ const SignupPage = () => {
     <>
       <MetaTags title="Signup" />
 
-      <main className="rw-main">
-        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
-          <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Signup</h2>
-            </header>
+      <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
 
-            <div className="rw-segment-main">
-              <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
-                  <Label
-                    name="username"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
-                  >
-                    Username
-                  </Label>
-                  <TextField
-                    name="username"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                    ref={usernameRef}
-                    validation={{
-                      required: {
-                        value: true,
-                        message: 'Username is required',
-                      },
-                    }}
-                  />
-                  <FieldError name="username" className="rw-field-error" />
+      <div className="page-grid min-h-screen bg-cinder">
+        <div className="col-span-12 col-start-1 row-start-1">
+          <h1 className="max-w-screen overflow-hidden pt-6 text-[375px] leading-[295px] text-fountainBlue">
+            <div className="text-white">SIGNUP</div>
+            <div className="outline">SIGNUP</div>
+            <div className="outline">SIGNUP</div>
+          </h1>
+        </div>
+        <div className="col-span-4 col-start-8 row-start-1">
+          {/* SIGNUP FORM */}
+          <Form onSubmit={onSubmit} className="mt-[100px] bg-cinder text-white">
+            <div className="field">
+              <Label
+                name="username"
+                className="text-icterine"
+                errorClassName="rw-label rw-label-error"
+              >
+                Email
+              </Label>
+              <TextField
+                name="username"
+                className="rw-input"
+                errorClassName="rw-input rw-input-error"
+                ref={usernameRef}
+                validation={{
+                  required: {
+                    value: true,
+                    message: 'Username is required',
+                  },
+                }}
+              />
+              <FieldError name="username" className="rw-field-error" />
+            </div>
 
-                  <Label
-                    name="password"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
-                  >
-                    Password
-                  </Label>
-                  <PasswordField
-                    name="password"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                    autoComplete="current-password"
-                    validation={{
-                      required: {
-                        value: true,
-                        message: 'Password is required',
-                      },
-                    }}
-                  />
-                  <FieldError name="password" className="rw-field-error" />
+            <div className="field">
+              <Label
+                name="firstName"
+                className="text-icterine"
+                errorClassName="rw-label rw-label-error"
+              >
+                First Name
+              </Label>
+              <TextField
+                name="firstName"
+                className="rw-input"
+                errorClassName="rw-input rw-input-error"
+                validation={{
+                  required: {
+                    value: true,
+                    message: 'First Name is required',
+                  },
+                }}
+              />
+              <FieldError name="firstName" className="rw-field-error" />
+            </div>
 
-                  <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">
-                      Sign Up
-                    </Submit>
-                  </div>
-                </Form>
+            <div className="field">
+              <Label
+                name="lastName"
+                className="text-icterine"
+                errorClassName="rw-label rw-label-error"
+              >
+                Last Name
+              </Label>
+              <TextField
+                name="lastName"
+                className="rw-input"
+                errorClassName="rw-input rw-input-error"
+                validation={{
+                  required: {
+                    value: true,
+                    message: 'Last Name is required',
+                  },
+                }}
+              />
+              <FieldError name="lastName" className="rw-field-error" />
+            </div>
+
+            <div className="field">
+              <Label
+                name="nickname"
+                className="text-icterine"
+                errorClassName="rw-label rw-label-error"
+              >
+                Nickname
+              </Label>
+              <TextField
+                name="nickname"
+                className="rw-input"
+                errorClassName="rw-input rw-input-error"
+                validation={{
+                  required: {
+                    value: true,
+                    message: 'Nickname is required',
+                  },
+                }}
+              />
+              <FieldError name="nickname" className="rw-field-error" />
+            </div>
+
+            <div className="field">
+              <Label
+                name="password"
+                className="text-icterine"
+                errorClassName="rw-label rw-label-error"
+              >
+                Password
+              </Label>
+              <PasswordField
+                name="password"
+                className="rw-input"
+                errorClassName="rw-input rw-input-error"
+                autoComplete="current-password"
+                validation={{
+                  required: {
+                    value: true,
+                    message: 'Password is required',
+                  },
+                }}
+              />
+              <FieldError name="password" className="rw-field-error" />
+            </div>
+
+            <div>
+              <Submit className="w-full bg-icterine py-6 text-center text-[38px] font-bold leading-none text-cinder hover:bg-fountainBlue">
+                Sign Up
+              </Submit>
+              <div className="py-3 text-center">
+                <span>Already have an account?</span>{' '}
+                <Link
+                  to={routes.login()}
+                  className="text-icterine underline hover:text-white hover:no-underline"
+                >
+                  Log in!
+                </Link>
               </div>
             </div>
-          </div>
-          <div className="rw-login-link">
-            <span>Already have an account?</span>{' '}
-            <Link to={routes.login()} className="rw-link">
-              Log in!
-            </Link>
-          </div>
+          </Form>
         </div>
-      </main>
+      </div>
+
+      <div className="border-t-2 border-t-icterine bg-icterine py-8 pl-leftGutter text-cinder">
+        <Footer />
+      </div>
     </>
   )
 }
