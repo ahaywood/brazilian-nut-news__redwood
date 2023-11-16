@@ -40,6 +40,13 @@ export const deleteFavoriteLinkUser: MutationResolvers['deleteFavoriteLinkUser']
     })
   }
 
+export const deleteFavoriteLinkUserByLinkUserId: MutationResolvers['deleteFavoriteLinkUserByLinkUserId'] =
+  ({ linkId, userId }) => {
+    return db.favoriteLinkUser.delete({
+      where: { favorite: { linkId, userId } },
+    })
+  }
+
 export const FavoriteLinkUser: FavoriteLinkUserRelationResolvers = {
   user: (_obj, { root }) => {
     return db.favoriteLinkUser.findUnique({ where: { id: root?.id } }).user()

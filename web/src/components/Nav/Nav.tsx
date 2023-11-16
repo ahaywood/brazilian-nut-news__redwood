@@ -4,7 +4,6 @@ import { useAuth } from 'src/auth'
 
 const Nav = () => {
   const { isAuthenticated, currentUser, logOut } = useAuth()
-  console.log({ currentUser })
   return (
     <nav className="top-bar sticky-bar fixed left-0 right-0 top-0 z-50 flex w-full items-center justify-between bg-cinder px-6 py-3 shadow-md">
       {/* left side */}
@@ -15,9 +14,11 @@ const Nav = () => {
         <li>
           <Link to={routes.latest()}>Latest</Link>
         </li>
-        <li>
-          <Link to={routes.submitLink()}>Submit a Link</Link>
-        </li>
+        {isAuthenticated && (
+          <li>
+            <Link to={routes.submitLink()}>Submit a Link</Link>
+          </li>
+        )}
       </ul>
 
       {/* right side */}

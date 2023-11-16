@@ -29,6 +29,30 @@
   }
 
   /* form elements */
+  label {
+    @apply font-bold text-4xl tracking-tight pb-3 block
+  }
+
+  .field {
+    @apply mb-8
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="url"] {
+    @apply bg-transparent  text-black font-bold text-xl px-10 w-full outline-icterine h-[95px] border-4 border-black;
+  }
+
+  .text-white  input[type="text"],
+  .text-white input[type="email"],
+  .text-white input[type="password"],
+  .text-white input[type="url"] {
+    @apply text-current border-current;
+  }
+
+
+
   textarea {
     @apply bg-white dark:bg-stormDust text-black dark:text-white font-bold text-xl py-8 px-10 w-full outline-icterine
   }
@@ -41,14 +65,7 @@
 @layer components {
   h1 .outline {
     -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #fbfd5d;
-    -webkit-text-fill-color: transparent;
-    @apply border-none outline-none;
-  }
-
-  h1.text-cinder .outline {
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #25292f;
+    -webkit-text-stroke-color: currentColor;
     -webkit-text-fill-color: transparent;
     @apply border-none outline-none;
   }
@@ -112,6 +129,22 @@
 
   .comment .comment p {
     @apply text-base;
+  }
+
+  .legal-content h2 {
+    @apply text-4xl font-bold
+  }
+
+  .legal-content h3 {
+    @apply text-2xl font-bold
+  }
+
+  .legal-content p {
+    @apply mb-6
+  }
+
+  .legal-content ul {
+    @apply ml-6 list-disc mb-6
   }
 }
 

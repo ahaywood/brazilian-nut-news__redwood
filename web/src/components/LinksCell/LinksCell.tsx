@@ -5,7 +5,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import SharedLink from '../SharedLink/SharedLink'
 
 export const QUERY = gql`
-  query LinksQuery($currentUserId: currentUser.id) {
+  query LinksQuery {
     linksByVote {
       id
       title
@@ -20,6 +20,7 @@ export const QUERY = gql`
       currentUserVote
       createdAt
       updatedAt
+      currentUserFavorite
     }
   }
 `
@@ -33,7 +34,6 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ linksByVote }: CellSuccessProps<LinksQuery>) => {
-  console.log({ linksByVote })
   return (
     <>
       {linksByVote.map((item: Link) => {
@@ -52,6 +52,7 @@ export const Success = ({ linksByVote }: CellSuccessProps<LinksQuery>) => {
             url={item.link}
             currentUserVote={item.currentUserVote}
             lastUpdated={item.updatedAt ? item.updatedAt : item.createdAt}
+            favorited={item.currentUserFavorite}
           />
         )
       })}

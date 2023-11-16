@@ -1,12 +1,21 @@
 import { MetaTags } from '@redwoodjs/web'
 
+import Footer from 'src/components/Footer/Footer'
+import ProfileFavoritesCell from 'src/components/ProfileFavoritesCell'
+import ProfileHeaderCell from 'src/components/ProfileHeaderCell'
+
 const FavoritesPage = ({ nickname }) => {
   return (
-    <>
+    <div className="min-h-screen bg-cinder">
       <MetaTags title="Favorites" description="Favorites page" />
 
-      <h1>FavoritesPage for {nickname}</h1>
-    </>
+      <ProfileHeaderCell nickname={nickname} />
+      <ProfileFavoritesCell nickname={nickname} />
+
+      <div className="border-t-2 border-t-icterine py-8 pl-leftGutter text-icterine">
+        <Footer />
+      </div>
+    </div>
   )
 }
 

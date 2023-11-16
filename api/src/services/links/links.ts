@@ -77,7 +77,12 @@ export const Link: LinkRelationResolvers = {
     return db.link.findUnique({ where: { id: root?.id } }).submittedBy()
   },
   comments: (_obj, { root }) => {
-    return db.link.findUnique({ where: { id: root?.id } }).comments()
+    return db.comment.findMany({
+      where: {
+        linkId: root?.id,
+        parentCommentId: null,
+      },
+    })
   },
   countComments: async (_obj, { root }) => {
     const numComments = await db.comment.count({

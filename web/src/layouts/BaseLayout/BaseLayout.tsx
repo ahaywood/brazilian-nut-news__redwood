@@ -1,3 +1,5 @@
+import { Toaster } from '@redwoodjs/web/dist/toast'
+
 import Header from 'src/components/Header/Header'
 import Nav from 'src/components/Nav/Nav'
 
@@ -8,6 +10,7 @@ type BaseLayoutProps = {
 const BaseLayout = ({ children }: BaseLayoutProps) => {
   return (
     <>
+      <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
       <Nav />
       <Header />
       {children}

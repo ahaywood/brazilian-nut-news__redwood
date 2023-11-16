@@ -8,7 +8,10 @@ import { useAuth } from 'src/auth'
 import { formatRelativeTime } from 'src/helpers/dateHelpers'
 
 import Icon from '../Icon/Icon'
+import { QUERY as LatestQuery } from '../LatestCell/LatestCell'
 import { QUERY as LinksQuery } from '../LinksCell/LinksCell'
+import { QUERY as UserFavoritesQuery } from '../ProfileFavoritesCell/ProfileFavoritesCell'
+import { QUERY as ProfileLinksSharedQuery } from '../ProfileLinksSharedCell/ProfileLinksSharedCell'
 
 const VOTE_MUTATION = gql`
   mutation VoteMutation(
@@ -30,6 +33,22 @@ const REMOVE_VOTE_MUTATION = gql`
   }
 `
 
+const FAVORITE_MUTATION = gql`
+  mutation FavoriteMutation($userId: Int!, $linkId: String!) {
+    createFavoriteLinkUser(input: { userId: $userId, linkId: $linkId }) {
+      id
+    }
+  }
+`
+
+const REMOVE_FAVORITE_MUTATION = gql`
+  mutation RemoveFavoriteMutation($userId: Int!, $linkId: String!) {
+    deleteFavoriteLinkUserByLinkUserId(linkId: $linkId, userId: $userId) {
+      id
+    }
+  }
+`
+
 interface Props {
   id: string
   numberOfComments: number
@@ -43,6 +62,7 @@ interface Props {
   countVotes: number
   currentUserVote: string
   lastUpdated: string
+  favorited: boolean
 }
 
 const SharedLink = ({
@@ -54,8 +74,9 @@ const SharedLink = ({
   countVotes,
   currentUserVote,
   lastUpdated,
+  favorited = false,
 }: Props) => {
-  const { currentUser } = useAuth()
+  const { isAuthenticated, currentUser } = useAuth()
   const [hasVoted, setHasVoted] = useState<string>(currentUserVote)
 
   const [vote, voteState] = useMutation(VOTE_MUTATION, {
@@ -63,7 +84,12 @@ const SharedLink = ({
       toast.error(error.message)
       console.error(error)
     },
-    refetchQueries: [LinksQuery],
+    refetchQueries: [
+      LinksQuery,
+      UserFavoritesQuery,
+      ProfileLinksSharedQuery,
+      LatestQuery,
+    ],
   })
 
   const [deleteVote, deleteVoteState] = useMutation(REMOVE_VOTE_MUTATION, {
@@ -71,8 +97,59 @@ const SharedLink = ({
       toast.error(error.message)
       console.error(error)
     },
-    refetchQueries: [LinksQuery],
+    refetchQueries: [
+      LinksQuery,
+      UserFavoritesQuery,
+      ProfileLinksSharedQuery,
+      LatestQuery,
+    ],
   })
+
+  const [favorite, favoriteState] = useMutation(FAVORITE_MUTATION, {
+    onError: (error) => {
+      toast.error(error.message)
+      console.error(error)
+    },
+    refetchQueries: [
+      LinksQuery,
+      UserFavoritesQuery,
+      ProfileLinksSharedQuery,
+      LatestQuery,
+    ],
+  })
+
+  const [unfavorite, unfavoriteState] = useMutation(REMOVE_FAVORITE_MUTATION, {
+    onError: (error) => {
+      toast.error(error.message)
+      console.error(error)
+    },
+    refetchQueries: [
+      LinksQuery,
+      UserFavoritesQuery,
+      ProfileLinksSharedQuery,
+      LatestQuery,
+    ],
+  })
+
+  const handleFavorite = () => {
+    console.log('favorite')
+    favorite({
+      variables: {
+        linkId: id,
+        userId: currentUser.id,
+      },
+    })
+  }
+
+  const handleRemoveFavorite = () => {
+    console.log('remove favorite')
+    unfavorite({
+      variables: {
+        linkId: id,
+        userId: currentUser.id,
+      },
+    })
+  }
 
   const handleVote = (newDirection: 'DOWN' | 'UP') => {
     // if the user had already voted and clicks the same vote again, toggle it off
@@ -101,20 +178,24 @@ const SharedLink = ({
     <div className="shared-link flex w-full gap-x-5 pb-6 pl-4 pr-8 pt-8">
       {/* vote */}
       <div className="flex flex-col">
-        <button
-          className={`up ${currentUserVote === 'UP' ? 'filled' : ''}`}
-          onClick={() => handleVote('UP')}
-          disabled={voteState.loading || deleteVoteState.loading}
-        >
-          <Icon id="up" />
-        </button>
-        <button
-          className={`down ${currentUserVote === 'DOWN' ? 'filled' : ''}`}
-          onClick={() => handleVote('DOWN')}
-          disabled={voteState.loading || deleteVoteState.loading}
-        >
-          <Icon id="up" className="rotate-180" />
-        </button>
+        {isAuthenticated && (
+          <>
+            <button
+              className={`up ${currentUserVote === 'UP' ? 'filled' : ''}`}
+              onClick={() => handleVote('UP')}
+              disabled={voteState.loading || deleteVoteState.loading}
+            >
+              <Icon id="up" />
+            </button>
+            <button
+              className={`down ${currentUserVote === 'DOWN' ? 'filled' : ''}`}
+              onClick={() => handleVote('DOWN')}
+              disabled={voteState.loading || deleteVoteState.loading}
+            >
+              <Icon id="up" className="rotate-180" />
+            </button>
+          </>
+        )}
       </div>
 
       {/* content */}
@@ -150,14 +231,37 @@ const SharedLink = ({
             rel="noreferrer"
           >
             {numberOfComments} comment{numberOfComments > 1 && 's'}
-          </Link>
+          </Link>{' '}
+          •{' '}
+          {favorited && isAuthenticated ? (
+            <button
+              className="item-center relative top-1 inline-flex gap-1 underline"
+              disabled={favoriteState.loading || unfavoriteState.loading}
+              onClick={handleRemoveFavorite}
+            >
+              <Icon id="heart--filled" size={20} /> Favorited
+            </button>
+          ) : (
+            <button
+              className="item-center relative top-1 inline-flex gap-1 underline"
+              disabled={favoriteState.loading || unfavoriteState.loading}
+              onClick={handleFavorite}
+            >
+              <Icon id="heart--empty" size={20} /> Mark as favorite
+            </button>
+          )}
         </div>
       </div>
 
       {/* arrow */}
-      <Link to={url} className="text-cinder dark:text-icterine">
+      <a
+        href={url}
+        className="text-cinder dark:text-icterine"
+        target="_blank"
+        rel="noreferrer"
+      >
         <Icon id="arrow" className="relative top-2 w-14" />
-      </Link>
+      </a>
     </div>
   )
 }

@@ -16,6 +16,14 @@ export const user: QueryResolvers['user'] = ({ id }) => {
   })
 }
 
+export const userByNickname: QueryResolvers['userByNickname'] = ({
+  nickname,
+}) => {
+  return db.user.findUnique({
+    where: { nickname },
+  })
+}
+
 export const createUser: MutationResolvers['createUser'] = ({ input }) => {
   return db.user.create({
     data: input,

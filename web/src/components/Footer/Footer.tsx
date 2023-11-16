@@ -7,7 +7,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="border-t-2 border-t-cinder py-8 pl-leftGutter text-black dark:border-t-icterine dark:text-icterine">
+    <footer>
       Copyright &copy; {currentYear()}.{' '}
       <a href="https://ahhacreative.com" target="_blank" rel="noreferrer">
         Ah Ha Creative, LLC

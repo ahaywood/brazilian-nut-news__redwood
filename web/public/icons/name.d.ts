@@ -4,6 +4,8 @@ export type IconName =
 	| "arrow"
 	| "facebook"
 	| "github"
+	| "heart--empty"
+	| "heart--filled"
 	| "hide"
 	| "linkedin"
 	| "show"

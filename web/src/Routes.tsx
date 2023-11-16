@@ -18,16 +18,19 @@ import ProfileLayout from './layouts/ProfileLayout/ProfileLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
-      <Route path="/login" page={LoginPage} name="login" />
-      <Route path="/signup" page={SignupPage} name="signup" />
-      <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
-      <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       <Set wrap={BaseLayout}>
+        <Route path="/login" page={LoginPage} name="login" />
+        <Route path="/signup" page={SignupPage} name="signup" />
+        <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
+        <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
+
         <Set wrap={ProfileLayout}>
           <Route path="/profile/{nickname:String}/favorites" page={FavoritesPage} name="favorites" />
           <Route path="/profile/{nickname:String}/comments" page={CommentsPage} name="comments" />
           <Route path="/profile/{nickname:String}" page={ProfilePage} name="profile" />
-          <Route path="/profile/{nickname:String}/edit" page={EditProfilePage} name="editProfile" />
+          <Set private unauthenticated="login">
+            <Route path="/profile/{nickname:String}/edit" page={EditProfilePage} name="editProfile" />
+          </Set>
         </Set>
 
         <Set wrap={LegalLayout}>

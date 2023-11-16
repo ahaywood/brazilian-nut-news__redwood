@@ -12,6 +12,7 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import Footer from 'src/components/Footer/Footer'
 
 const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
   const { isAuthenticated, reauthenticate, validateResetToken, resetPassword } =
@@ -61,59 +62,59 @@ const ResetPasswordPage = ({ resetToken }: { resetToken: string }) => {
     <>
       <MetaTags title="Reset Password" />
 
-      <main className="rw-main">
-        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
-          <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">
-                Reset Password
-              </h2>
-            </header>
-
-            <div className="rw-segment-main">
-              <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
-                  <div className="text-left">
-                    <Label
-                      name="password"
-                      className="rw-label"
-                      errorClassName="rw-label rw-label-error"
-                    >
-                      New Password
-                    </Label>
-                    <PasswordField
-                      name="password"
-                      autoComplete="new-password"
-                      className="rw-input"
-                      errorClassName="rw-input rw-input-error"
-                      disabled={!enabled}
-                      ref={passwordRef}
-                      validation={{
-                        required: {
-                          value: true,
-                          message: 'New Password is required',
-                        },
-                      }}
-                    />
-
-                    <FieldError name="password" className="rw-field-error" />
-                  </div>
-
-                  <div className="rw-button-group">
-                    <Submit
-                      className="rw-button rw-button-blue"
-                      disabled={!enabled}
-                    >
-                      Submit
-                    </Submit>
-                  </div>
-                </Form>
-              </div>
-            </div>
-          </div>
+      <div className="page-grid min-h-screen bg-cinder">
+        <div className="col-span-12 col-start-1 row-start-1">
+          <h1 className="max-w-screen overflow-hidden pt-6 text-[375px] leading-[295px] text-fountainBlue">
+            <div className="text-white">RESET</div>
+            <div className="outline">PASSWORD</div>
+          </h1>
         </div>
-      </main>
+        <div className="col-span-4 col-start-8 row-start-1">
+          {/* RESET PASSWORD FORM */}
+          <Form onSubmit={onSubmit} className="mt-[100px] bg-cinder text-white">
+            <div className="text-left">
+              <div className="field">
+                <Label
+                  name="password"
+                  className="text-icterine"
+                  errorClassName="rw-label rw-label-error"
+                >
+                  New Password
+                </Label>
+                <PasswordField
+                  name="password"
+                  autoComplete="new-password"
+                  className="rw-input"
+                  errorClassName="rw-input rw-input-error"
+                  disabled={!enabled}
+                  ref={passwordRef}
+                  validation={{
+                    required: {
+                      value: true,
+                      message: 'New Password is required',
+                    },
+                  }}
+                />
+              </div>
+
+              <FieldError name="password" className="rw-field-error" />
+            </div>
+
+            <div className="rw-button-group">
+              <Submit
+                className="w-full bg-icterine py-6 text-center text-[38px] font-bold leading-none text-cinder hover:bg-fountainBlue"
+                disabled={!enabled}
+              >
+                Submit
+              </Submit>
+            </div>
+          </Form>
+        </div>
+      </div>
+
+      <div className="border-t-2 border-t-icterine bg-icterine py-8 pl-leftGutter text-cinder">
+        <Footer />
+      </div>
     </>
   )
 }

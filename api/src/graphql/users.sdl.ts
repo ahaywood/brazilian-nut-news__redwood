@@ -5,10 +5,6 @@ export const schema = gql`
     nickname: String
     firstName: String
     lastName: String
-    hashedPassword: String!
-    salt: String!
-    resetToken: String
-    resetTokenExpiresAt: DateTime
     twitter: String
     facebook: String
     youtube: String
@@ -25,6 +21,7 @@ export const schema = gql`
   type Query {
     users: [User!]! @skipAuth
     user(id: Int!): User @skipAuth
+    userByNickname(nickname: String!): User @skipAuth
   }
 
   input CreateUserInput {
@@ -32,10 +29,6 @@ export const schema = gql`
     nickname: String
     firstName: String
     lastName: String
-    hashedPassword: String!
-    salt: String!
-    resetToken: String
-    resetTokenExpiresAt: DateTime
     twitter: String
     facebook: String
     youtube: String
@@ -48,10 +41,6 @@ export const schema = gql`
     nickname: String
     firstName: String
     lastName: String
-    hashedPassword: String
-    salt: String
-    resetToken: String
-    resetTokenExpiresAt: DateTime
     twitter: String
     facebook: String
     youtube: String

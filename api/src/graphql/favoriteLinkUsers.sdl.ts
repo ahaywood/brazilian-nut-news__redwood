@@ -33,5 +33,9 @@ export const schema = gql`
       input: UpdateFavoriteLinkUserInput!
     ): FavoriteLinkUser! @skipAuth
     deleteFavoriteLinkUser(id: Int!): FavoriteLinkUser! @skipAuth
+    deleteFavoriteLinkUserByLinkUserId(
+      linkId: String!
+      userId: Int!
+    ): FavoriteLinkUser! @skipAuth
   }
 `
