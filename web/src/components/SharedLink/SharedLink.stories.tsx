@@ -24,15 +24,18 @@ type Story = StoryObj<typeof SharedLink>
 
 export const Primary: Story = {
   args: {
-    id: '123',
-    numberOfComments: 3,
-    points: 10,
+    id: '1',
+    numberOfComments: 13,
     submittedBy: {
       firstName: 'Amy',
       lastName: 'Dutton',
-      username: 'selfteachme',
+      nickname: 'selfteachme',
     },
-    title: 'You will never believe this',
-    url: 'https://google.com',
+    title: 'RedwoodJS Docs',
+    url: 'https://redwoodjs.com/docs',
+    countVotes: 60,
+    currentUserVote: 'UP',
+    lastUpdated: '2023-11-14T22:29:17.845Z',
+    favorited: true,
   },
 }

@@ -68,6 +68,7 @@ export const Success = ({
   link,
 }: CellSuccessProps<FindLinkQuery, FindLinkQueryVariables>) => {
   const { isAuthenticated } = useAuth()
+  console.log({ link })
   return (
     <div>
       <div className={`${!isAuthenticated && 'border-b-2 border-b-icterine'}`}>

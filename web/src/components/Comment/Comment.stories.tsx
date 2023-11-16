@@ -31,7 +31,7 @@ export const Primary: Story = {
       lastName: 'Dutton',
       nickname: 'selfteachme',
     },
-    lastUpdated: '2021-08-01T00:00:00.000Z',
+    lastUpdated: '2023-11-14T22:29:17.845Z',
     linkId: '1',
   },
 }
@@ -45,7 +45,7 @@ export const NestedComment: Story = {
         lastName: 'Dutton',
         nickname: 'selfteachme',
       }}
-      lastUpdated="2021-08-01T00:00:00.000Z"
+      lastUpdated="2023-11-14T22:29:17.845Z"
       linkId="1"
     >
       <Comment

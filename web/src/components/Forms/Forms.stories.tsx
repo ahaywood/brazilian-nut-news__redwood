@@ -17,10 +17,12 @@ import {
   Form,
   PasswordField,
   TextAreaField,
+  TextField,
 } from '@redwoodjs/forms'
 
 const meta: Meta = {
   title: 'Forms',
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -28,11 +30,11 @@ export default meta
 type Story = StoryObj
 
 export const TextInput: Story = {
-  render: () => <div>Form</div>,
-}
-
-export const TextInputWithIcon: Story = {
-  render: () => <div>Form</div>,
+  render: () => (
+    <Form>
+      <TextField name="test" />
+    </Form>
+  ),
 }
 
 export const EmailInput: Story = {

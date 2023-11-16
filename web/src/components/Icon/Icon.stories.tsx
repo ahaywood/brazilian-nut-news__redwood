@@ -16,6 +16,7 @@ import Icon from './Icon'
 
 const meta: Meta<typeof Icon> = {
   component: Icon,
+  tags: ['autodocs'],
 }
 
 export default meta

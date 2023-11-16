@@ -40,7 +40,6 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   userByNickname,
 }: CellSuccessProps<UserFavoritesQuery>) => {
-  console.log(userByNickname)
   return (
     <ul>
       {userByNickname.favorites.map((item) => {

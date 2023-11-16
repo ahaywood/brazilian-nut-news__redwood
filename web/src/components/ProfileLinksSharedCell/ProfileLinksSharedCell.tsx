@@ -47,6 +47,7 @@ export const Success = ({
   FindProfileLinksSharedQuery,
   FindProfileLinksSharedQueryVariables
 >) => {
+  console.log({ userByNickname })
   return (
     <>
       {userByNickname.links.map((item: Link) => {
