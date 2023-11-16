@@ -18,6 +18,7 @@ export const QUERY = gql`
       submittedById
       title
       countVotes
+      countComments
       currentUserVote
       submittedBy {
         id
@@ -72,7 +73,7 @@ export const Success = ({
       <div className={`${!isAuthenticated && 'border-b-2 border-b-icterine'}`}>
         <SharedLink
           id={link.id}
-          numberOfComments={3}
+          numberOfComments={link.countComments}
           countVotes={link.countVotes}
           submittedBy={{
             firstName: link.submittedBy.firstName,

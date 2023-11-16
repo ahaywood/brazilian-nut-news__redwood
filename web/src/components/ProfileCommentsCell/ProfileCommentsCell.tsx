@@ -12,7 +12,6 @@ export const QUERY = gql`
         linkId
         link {
           title
-          id
         }
         author {
           id
@@ -70,6 +69,8 @@ export const Success = ({
             body={comment.body}
             id={comment.id}
             linkId={comment.linkId}
+            link={comment.link}
+            showRelatedLinkInfo={true}
           >
             <div>
               {comment.childComments &&

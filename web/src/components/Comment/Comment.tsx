@@ -22,6 +22,10 @@ interface Props {
   id?: string
   lastUpdated: string
   linkId: string
+  link?: {
+    title?: string
+  }
+  showRelatedLinkInfo?: boolean
 }
 
 const Comment = ({
@@ -32,15 +36,18 @@ const Comment = ({
   id,
   lastUpdated,
   linkId,
+  link,
+  showRelatedLinkInfo = false,
 }: Props) => {
   const [isCommentsShowing, setIsCommentsShowing] = useState(false)
   const { isAuthenticated } = useAuth()
 
+  console.log({ link })
   return (
-    <div className="flex gap-x-5 pl-4 pr-8">
+    <div className="flex gap-x-5 pl-4 pr-8" id={`comment-${id}`}>
       {/* vote */}
       <div className="flex w-[20px] flex-col items-center">
-        {!isChildComment && (
+        {!isChildComment && isAuthenticated && (
           <>
             <button className="up filled">
               <Icon id="up" size={16} />
@@ -63,6 +70,18 @@ const Comment = ({
             {commentedBy.firstName} {commentedBy.lastName}
           </Link>{' '}
           • {formatRelativeTime(lastUpdated)}
+          {showRelatedLinkInfo && link && (
+            <span>
+              {' '}
+              • posted on{' '}
+              <Link
+                to={routes.link({ id: linkId })}
+                className="underline hover:no-underline"
+              >
+                {link.title}
+              </Link>
+            </span>
+          )}
         </div>
 
         {/* comment content */}

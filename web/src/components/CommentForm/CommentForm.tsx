@@ -84,7 +84,10 @@ const CommentForm = ({
           <button className={`button light-mode ${size}`}>Add Comment</button>
           {isCollapsible && (
             <button
-              onClick={close}
+              onClick={(e) => {
+                e.preventDefault()
+                close()
+              }}
               className="border-b-2 border-b-transparent hover:border-b-icterine"
             >
               Cancel

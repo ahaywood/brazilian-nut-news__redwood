@@ -16,10 +16,48 @@ import Comment from './Comment'
 
 const meta: Meta<typeof Comment> = {
   component: Comment,
+  tags: ['autodocs'],
 }
 
 export default meta
 
 type Story = StoryObj<typeof Comment>
 
-export const Primary: Story = {}
+export const Primary: Story = {
+  args: {
+    body: 'This is a comment',
+    commentedBy: {
+      firstName: 'Amy',
+      lastName: 'Dutton',
+      nickname: 'selfteachme',
+    },
+    lastUpdated: '2021-08-01T00:00:00.000Z',
+    linkId: '1',
+  },
+}
+
+export const NestedComment: Story = {
+  render: () => (
+    <Comment
+      body="This is a comment"
+      commentedBy={{
+        firstName: 'Amy',
+        lastName: 'Dutton',
+        nickname: 'selfteachme',
+      }}
+      lastUpdated="2021-08-01T00:00:00.000Z"
+      linkId="1"
+    >
+      <Comment
+        body="This is a comment"
+        commentedBy={{
+          firstName: 'Amy',
+          lastName: 'Dutton',
+          nickname: 'selfteachme',
+        }}
+        lastUpdated="2021-08-01T00:00:00.000Z"
+        linkId="1"
+      />
+    </Comment>
+  ),
+}
