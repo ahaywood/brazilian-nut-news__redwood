@@ -184,6 +184,7 @@ const SharedLink = ({
               className={`up ${currentUserVote === 'UP' ? 'filled' : ''}`}
               onClick={() => handleVote('UP')}
               disabled={voteState.loading || deleteVoteState.loading}
+              data-testid="voteUpButton"
             >
               <Icon id="up" />
             </button>
@@ -191,6 +192,7 @@ const SharedLink = ({
               className={`down ${currentUserVote === 'DOWN' ? 'filled' : ''}`}
               onClick={() => handleVote('DOWN')}
               disabled={voteState.loading || deleteVoteState.loading}
+              data-testid="voteDownButton"
             >
               <Icon id="up" className="rotate-180" />
             </button>
@@ -259,6 +261,7 @@ const SharedLink = ({
         className="text-cinder dark:text-icterine"
         target="_blank"
         rel="noreferrer"
+        data-testid="sharedLinkUrl"
       >
         <Icon id="arrow" className="relative top-2 w-14" />
       </a>
