@@ -11,4 +11,8 @@ describe('Header', () => {
       render(<Header />)
     }).not.toThrow()
   })
+
+  it('matches the snapshot', () => {
+    expect(render(<Header />)).toMatchSnapshot()
+  })
 })
