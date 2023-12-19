@@ -1,4 +1,4 @@
-import { render } from '@redwoodjs/testing/web'
+import { render, screen } from '@redwoodjs/testing/web'
 
 import Icon from './Icon'
 
@@ -8,7 +8,16 @@ import Icon from './Icon'
 describe('Icon', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<Icon />)
+      render(<Icon id="arrow" />)
     }).not.toThrow()
+  })
+
+  it('can be a specific size', () => {
+    render(<Icon id="arrow" size={64} />)
+    expect(screen.getByTestId('icon')).toHaveAttribute('width', '64')
+  })
+
+  it('displays an arrow icon', () => {
+    expect(render(<Icon id="arrow" />)).toMatchSnapshot()
   })
 })
