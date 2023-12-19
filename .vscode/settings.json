@@ -1,9 +1,14 @@
 {
+    "workbench.colorCustomizations": {
+    "activityBar.background": "#25292f",
+    "titleBar.activeBackground": "#fbfd5d",
+    "titleBar.activeForeground": "#25292f"
+  },
   "editor.tabSize": 2,
   "files.trimTrailingWhitespace": true,
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "[prisma]": {
     "editor.formatOnSave": true
